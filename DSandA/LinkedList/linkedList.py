@@ -57,3 +57,67 @@ class LinkedList :
                 self.head = None 
                 self.tail = None 
             return temp 
+        
+    def prepend(self, value): 
+        " we want to add the new_node to the head"
+        new_node = Node(value) 
+        if self.length == 0:
+            "LL is empty"
+            self.head, self.tail = new_node, new_node
+        else: 
+            "LL is not empty"
+            new_node.next = self.head  
+            self.head = new_node
+        self.length += 1 
+        return True 
+    
+    def pop_first (self): 
+        if self.length == 0:
+            return None 
+        else: 
+            temp = self.head 
+            self.head = self.head.next 
+            temp.next = None 
+            self.length -= 1 
+            if self.length == 0:
+                self.tail = None 
+            return temp.value      
+        
+    def get(self,index) : 
+        if index < 0 or index >= self.length: 
+            return None 
+        
+        for _ in range(index): 
+            temp = temp.next 
+        return temp
+    
+    def set_value(self, index, value):
+        if index < 0 or index >= self.length: 
+            return False 
+        
+        for _ in range(index): 
+            temp = temp.next 
+
+        temp.value = value 
+        return True
+    
+    def insert(self,index,value): 
+        if index < 0 or index >= self.length: 
+            print('Index out of range')
+            return "False"
+        if index == 0 : 
+           return self.prepend(value) 
+        elif index == self.length: 
+            return self.appennd(value) 
+        else: 
+            new_node = Node(value) 
+            temp = self.get(index-1) 
+            new_node.next = temp.next 
+            temp.next = new_node     
+            self.length += 1 
+            return True 
+    def remove(self,index) : 
+        pass 
+    def reverse(self,index,value): 
+        pass 
+        
