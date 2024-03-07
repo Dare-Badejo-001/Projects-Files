@@ -117,7 +117,56 @@ class LinkedList :
             self.length += 1 
             return True 
     def remove(self,index) : 
-        pass 
-    def reverse(self,index,value): 
-        pass 
+        if index < 0 or index >= self.length: 
+            print('Index out of range')
         
+        if index == 0: 
+            return self.pop_first(self)
+
+        if index == self.length: 
+            return self.pop()
+        else: 
+            prev = self.get(index-1)
+            temp = prev.next 
+            prev.next = temp.next 
+            temp.next = None 
+            self.length -= 1 
+            return temp 
+
+    def reverse(self): 
+        temp = self.head 
+        self.head = self.tail 
+        self.tail = temp
+        before , after  = None , temp.next
+
+        for _ in range(self.length): 
+            after = temp.next 
+            temp.next = before 
+            before = temp 
+            temp = after 
+    
+    def find_middle_node(self): 
+        slow = self.head 
+        fast = self.head
+
+        while fast and fast.next: 
+            slow = slow.next 
+            fast = fast.next.next 
+        
+        return slow
+    
+    def find_kth_node_from_end(self,k): 
+        fast = slow = self.head
+
+        for _ in range(k): 
+            if fast is None: 
+                return None 
+            fast = fast.next 
+
+            while fast: 
+                slow = slow.next 
+                fast = fast.next 
+            return slow 
+                
+        
+
