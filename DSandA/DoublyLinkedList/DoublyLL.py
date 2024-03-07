@@ -32,13 +32,14 @@ class DoublyLinkedList:
     def pop(self): 
         if self.length == 0 : 
             return None 
-        else : 
-            temp = self.tail 
-            self.tail = self.tail.prev 
-            self.tail.next = None 
-            temp.prev = None
-            return temp 
-        return None 
-    
+        temp = self.tail 
+        self.tail = self.tail.prev 
+        self.tail.next = None 
+        temp.prev = None
+        self.length -= 1
+        if self.length == 0 : 
+            self.head = None 
+            self.tail = None 
+        return temp     
     
             
