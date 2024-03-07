@@ -33,13 +33,26 @@ class DoublyLinkedList:
         if self.length == 0 : 
             return None 
         temp = self.tail 
-        self.tail = self.tail.prev 
-        self.tail.next = None 
-        temp.prev = None
-        self.length -= 1
-        if self.length == 0 : 
+        if self.length == 1: 
             self.head = None 
             self.tail = None 
-        return temp     
+        else: 
+            self.tail = self.tail.prev 
+            self.tail.next = None 
+            temp.prev = None 
+        self.length -= 1 
+        return temp    
     
-            
+    def prepend(self,value): 
+        new_node = Node(value)
+        if self.length == 0: 
+            self.head = new_node 
+            self.tail = new_node 
+        else: 
+            new_node.next = self.head 
+            self.head.prev = new_node 
+            self.head = new_node 
+        self.length += 1 
+        return True 
+    
+               
